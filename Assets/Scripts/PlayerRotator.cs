@@ -11,24 +11,24 @@ public class PlayerRotator : MonoBehaviour
     [Header("Rotation")]
     [SerializeField] float speedRotation = 30;
 
-    Rigidbody rb;
+    Rigidbody2D rb;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         //press right to rotate on right
         if(Input.GetKeyDown(rightInput))
         {
-            rb.AddTorque(Vector3.right * speedRotation, ForceMode.Impulse);
+            rb.AddTorque(-speedRotation, ForceMode2D.Impulse);
         }
         //or left to rotate on left
         else if(Input.GetKeyDown(leftInput))
         {
-            rb.AddTorque(Vector3.left * speedRotation, ForceMode.Impulse);
+            rb.AddTorque(speedRotation, ForceMode2D.Impulse);
         }
     }
 }
