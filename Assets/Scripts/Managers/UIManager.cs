@@ -10,6 +10,9 @@
         [SerializeField] GameObject pauseMenu = default;
         [SerializeField] GameObject endMenu = default;
 
+        [Header("Score")]
+        [SerializeField] Text scoreText = default;
+
         void Start()
         {
             //by default, deactive menu
@@ -44,6 +47,11 @@
 
             //active or deactive end menu
             endMenu.SetActive(active);
+        }
+
+        public void SetScoreText(int score)
+        {
+            scoreText.text = score.ToString();
         }
     }
 }
