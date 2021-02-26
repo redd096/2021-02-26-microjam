@@ -22,7 +22,7 @@ public class Wall : MonoBehaviour
     void FixedUpdate()
     {
         //move
-        rb.velocity = direction * speed;
+        Movement();
     }
 
     #region private API
@@ -39,6 +39,12 @@ public class Wall : MonoBehaviour
 
         //set rotation
         transform.rotation = Quaternion.Euler(rotation);
+    }
+
+    void Movement()
+    {
+        //move
+        rb.velocity = direction * speed;
     }
 
     #endregion

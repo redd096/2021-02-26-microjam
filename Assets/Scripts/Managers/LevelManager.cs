@@ -9,6 +9,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] float delayEverySpawn = 3;
     [SerializeField] Wall[] wallPrefabs = default;
 
+    Dictionary<Wall, Pooling<Wall>> pools = new Dictionary<Wall, Pooling<Wall>>();
+
     float timerSpawn;
     int score;
 
@@ -33,10 +35,13 @@ public class LevelManager : MonoBehaviour
 
     void SpawnWall()
     {
-        //instantiate random wall
-        Wall wall = Instantiate(wallPrefabs[Random.Range(0, wallPrefabs.Length)]);
+        //get random wall prefab - if not in dictionary, create pooling
+        Wall wallPrefab = wallPrefabs[Random.Range(0, wallPrefabs.Length)];
+        if (pools.ContainsKey(wallPrefab) == false)
+            pools.Add(wallPrefab, new Pooling<Wall>());
 
-        //spawn at random position
+        //spawn from pooling at random position
+        Wall wall = pools[wallPrefab].Instantiate(wallPrefab);
         wall.SpawnRandomPosition();
     }
 
