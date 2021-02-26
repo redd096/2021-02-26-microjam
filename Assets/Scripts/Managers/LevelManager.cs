@@ -23,9 +23,8 @@ public class LevelManager : MonoBehaviour
         //if end spawn timer
         if(Time.time > timerSpawn)
         {
-            //increase timer
+            //increase timer and spawn wall
             timerSpawn = Time.time + delayEverySpawn;
-
             SpawnWall();
         }
     }
@@ -54,8 +53,9 @@ public class LevelManager : MonoBehaviour
 
     public void EndGame()
     {
-        //freeze time
+        //freeze time and lock player
         Time.timeScale = 0;
+        GameManager.instance.player.enabled = false;
 
         //end menu
         GameManager.instance.uiManager.EndMenu(true);

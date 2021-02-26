@@ -8,12 +8,14 @@
     {
         public UIManager uiManager { get; private set; }
         public LevelManager levelManager { get; private set; }
+        public PlayerRotator player { get; private set; }
 
         protected override void SetDefaults()
         {
             //get references
             uiManager = FindObjectOfType<UIManager>();
             levelManager = FindObjectOfType<LevelManager>();
+            player = FindObjectOfType<PlayerRotator>();
         }
     }
 }
