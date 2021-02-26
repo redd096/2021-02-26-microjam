@@ -44,6 +44,7 @@
     public class LimitsManager : MonoBehaviour
     {
         [Header("If there aren't 4 walls, regen on play")]
+        [SerializeField] bool canRegenOnPlay = true;
         [SerializeField] List<Transform> walls = new List<Transform>();
 
         Camera cam;
@@ -53,6 +54,10 @@
 
         void Start()
         {
+            //do only if can regen on play
+            if (canRegenOnPlay == false)
+                return;
+
             cam = Camera.main;
 
             //if there aren't 4 walls, destroy everything
@@ -121,6 +126,10 @@
 
         void SetLimits()
         {
+            //do only if there are 4 walls
+            if (walls == null && walls.Count < 4)
+                return;
+
             //get size of the walls
             float depthScreen = cam.WorldToViewportPoint(transform.position).z;
             Vector3 size = GetScale(depthScreen);
@@ -140,7 +149,7 @@
         {
             //get size for the wall from the screen width and height
             Vector3 left = cam.ViewportToWorldPoint(new Vector3(0, 0, depth));
-            Vector3 right = cam.ViewportToWorldPoint(new Vector3(2, 2, depth));
+            Vector3 right = cam.ViewportToWorldPoint(new Vector3(1.5f, 1.5f, depth));
 
             Vector3 size = right - left;
 
