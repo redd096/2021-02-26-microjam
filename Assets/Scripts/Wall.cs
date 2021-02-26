@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using redd096;
 
 public class Wall : MonoBehaviour
 {
@@ -68,6 +69,20 @@ public class Wall : MonoBehaviour
         //1 - right
         else
             SpawnWall(new Vector2(1.5f, 0.5f), Vector2.left, Vector3.zero);
+    }
+
+    public void CheckDestroyObject()
+    {
+        //get screen up right and down left
+        Vector2 upRight = cam.ViewportToWorldPoint(new Vector2(1, 1));
+        Vector2 downLeft = cam.ViewportToWorldPoint(new Vector2(0, 0));
+
+        if(transform.position.x > upRight.x || transform.position.x < downLeft.x        //if exit right or left
+            || transform.position.y > upRight.y || transform.position.y < downLeft.y)   //or exit up or down
+        {
+            //destroy this
+            Pooling.Destroy(gameObject);
+        }
     }
 
     #endregion

@@ -36,8 +36,8 @@ public class WallCollider : MonoBehaviour
         //if hit limit of the scene
         if(collision.GetComponentInParent<LimitsManager>())
         {
-            //get wall parent and destroy
-            Destroy(GetComponentInParent<Wall>().gameObject);
+            //get wall parent and check destroy
+            GetComponentInParent<Wall>().CheckDestroyObject();
         }
     }
 }

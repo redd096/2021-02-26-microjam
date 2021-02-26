@@ -60,19 +60,21 @@
 
             cam = Camera.main;
 
-            //if there aren't 4 walls, destroy everything
+            //if there aren't 4 walls, destroy everything and recreate
             if (walls == null || walls.Count < 4)
             {
                 DestroyLimits();
+                CreateLimits();
             }
-
-            //create walls
-            CreateLimits();
         }
 
         void Update()
         {
-            //if different size, reset limits
+            //if there aren't 4 walls, don't resize
+            if (walls == null || walls.Count < 4)
+                return;
+
+                //if different size, reset limits
             if (Screen.width != width || Screen.height != height)
             {
                 width = Screen.width;
@@ -126,10 +128,6 @@
 
         void SetLimits()
         {
-            //do only if there are 4 walls
-            if (walls == null && walls.Count < 4)
-                return;
-
             //get size of the walls
             float depthScreen = cam.WorldToViewportPoint(transform.position).z;
             Vector3 size = GetScale(depthScreen);
