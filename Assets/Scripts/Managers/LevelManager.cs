@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void EndGame()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //freeze time
+        Time.timeScale = 0;
     }
 }
